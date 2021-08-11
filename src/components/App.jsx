@@ -1,8 +1,11 @@
+import "../styles/App.css"
+import React from "react"
+import 'tailwindcss/tailwind.css'
 
 const App = () => {
     return (
-        <div>
-            <h1>Hello World</h1>
+        <div className="bg-red-300">
+            <h1 className="text-xl text-purple-600">Hello World</h1>
         </div>
     )
 }
