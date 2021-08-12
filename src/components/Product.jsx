@@ -4,7 +4,7 @@ export const Product = ({ product }) => {
     return (
         <>
             <div className="mx-2 w-72 lg:mb-0 mb-8 shadow-lg">
-                <div>
+                <div className="bg-gray-100">
                     <img src={product.image} className="w-full h-44 object-contain" />
                 </div>
                 <div className="bg-white">

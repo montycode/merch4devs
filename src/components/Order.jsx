@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Order = () => {
     return (
-        <div class="flex flex-col justify-center items-center shadow-lg">
+        <div class="flex flex-col my-5 justify-center items-center shadow-lg">
             <h6 class="text-black font-medium my-4">Pedido</h6>
             <div class="flex justify-between items-center w-full py-5 border-b-2 border-gray-200">
                 <p class="text-gray-400 ml-4">Subtotal</p>
