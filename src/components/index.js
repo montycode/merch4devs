@@ -1,3 +1,6 @@
 export * from './Layout'
 export * from './Header'
 export * from './Footer'
+export * from './Products'
+export * from './Product'
+export * from './Order'
