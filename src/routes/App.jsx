@@ -1,23 +1,29 @@
 import React from 'react'
+import AppContext from '../context/AppContext';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Home, Checkout, Success, NotFound, Payment, Information } from '@/containers';
+import { useInitialState } from '@/hooks';
 import { Layout } from '@/components'
 import 'tailwindcss/tailwind.css'
 
 const App = () => {
+    const initialState = useInitialState();
+    
     return (
-        <BrowserRouter>
-            <Layout>
-                <Switch>
-                    <Route exact path='/' component={Home} />
-                    <Route exact path='/checkout' component={Checkout} />
-                    <Route exact path='/checkout/information' component={Information} />
-                    <Route exact path='/checkout/payment' component={Payment} />
-                    <Route exact path='/checkout/success' component={Success} />
-                    <Route component={NotFound} />
-                </Switch>
-            </Layout>
-        </BrowserRouter>
+        <AppContext.Provider value={initialState}>
+            <BrowserRouter>
+                <Layout>
+                    <Switch>
+                        <Route exact path='/' component={Home} />
+                        <Route exact path='/checkout' component={Checkout} />
+                        <Route exact path='/checkout/information' component={Information} />
+                        <Route exact path='/checkout/payment' component={Payment} />
+                        <Route exact path='/checkout/success' component={Success} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </Layout>
+            </BrowserRouter>
+        </AppContext.Provider>
     )
 }
 

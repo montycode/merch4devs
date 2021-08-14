@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
     return (
@@ -11,16 +12,16 @@ export const Footer = () => {
                     <div className="xl:w-3/6 sm:w-full">
                         <ul className="xl:flex lg:flex md:flex sm:flex justify-around">
                             <li className="text-white hover:text-gray-300 mb-3 xl:mb-0 lg:mb-0 md:mb-0 sm:mb-0">
-                                <a className="focus:outline-none focus:underline" href="javascript:void(0)">Terms of service</a>
+                                <Link className="focus:outline-none focus:underline" to='/'>Terms of service</Link>
                             </li>
                             <li className="text-white hover:text-gray-300 mb-3 xl:mb-0 lg:mb-0 md:mb-0 sm:mb-0">
-                                <a className="focus:outline-none focus:underline" href="javascript:void(0)">Privacy Policy</a>
+                                <Link className="focus:outline-none focus:underline" to='/'>Privacy Policy</Link>
                             </li>
                             <li className="text-white hover:text-gray-300 mb-3 xl:mb-0 lg:mb-0 md:mb-0 sm:mb-0">
-                                <a className="focus:outline-none focus:underline" href="javascript:void(0)">Security</a>
+                                <Link className="focus:outline-none focus:underline" to='/'>Security</Link>
                             </li>
                             <li className="text-white hover:text-gray-300 mb-3 xl:mb-0 lg:mb-0 md:mb-0 sm:mb-0">
-                                <a className="focus:outline-none focus:underline" href="javascript:void(0)">Sitemap</a>
+                                <Link className="focus:outline-none focus:underline" to='/'>Sitemap</Link>
                             </li>
                         </ul>
                     </div>

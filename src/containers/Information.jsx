@@ -1,17 +1,30 @@
-import React, { useRef } from 'react'
-import { Order, LinkButton } from '@/components'
+import React, { useRef, useContext} from 'react';
+import { useHistory } from 'react-router-dom';
+import { Order, LinkButton } from '@/components';
+import AppContext from '../context/AppContext';
 
 export const Information = () => {
-    let form = useRef(null);
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const form_data = new FormData(form.current);
-        let payload = {};
-        form_data.forEach(function (value, key) {
-            payload[key] = value;
-        });
-        // console.log("payload", payload);
-        // Place your API call here to submit your payload.
+    const { state, addToBuyer } = useContext(AppContext);
+    const { cart } = state;
+    const history = useHistory();
+    const form = useRef(null);
+
+    const handleSubmit = () => {
+        const formData = new FormData(form.current);
+        const buyer ={
+            'fullName': formData.get('fullName'),
+            'address': formData.get('address'),
+            'email': formData.get('email'),
+            'apto': formData.get('apto'),
+            'country': formData.get('country'),
+            'state': formData.get('state'),
+            'city': formData.get('city'),
+            'zip': formData.get('zip'),
+            'phone': formData.get('phone'),
+        }
+        console.log(buyer);
+        addToBuyer(buyer);
+        history.push('/checkout/payment');
     };
 
     return (
@@ -39,13 +52,13 @@ export const Information = () => {
                                                     <label htmlFor="FullName" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                                                         Nombre Completo
                                                     </label>
-                                                    <input type="text" name="fullName" required id="FullName" className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" placeholder />
+                                                    <input type="text" name="fullName" required id="FullName" className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" />
                                                 </div>
                                                 <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
                                                     <label htmlFor="Address" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                                                         Dirección
                                                     </label>
-                                                    <input type="text" id="Address" name="address" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" placeholder />
+                                                    <input type="text" id="Address" name="address" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" />
                                                 </div>
                                                 <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
                                                     <label htmlFor="email2" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
@@ -61,28 +74,12 @@ export const Information = () => {
                                                         </div>
                                                         <input id="email2" name="email" required className="w-full bg-transparent text-gray-800 dark:text-gray-100 focus:outline-none focus:border focus:border-indigo-700 font-normal py-3 flex items-center pl-16 text-sm border-gray-300 rounded border shadow" placeholder="ejemplo@gmail.com" />
                                                     </div>
-                                                    {/* <div className="flex justify-between items-center pt-1 text-green-400">
-                                                        <p className="text-xs">Email submission success!</p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
-                                                            <path
-                                                                className="heroicon-ui"
-                                                                d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0
-                                            0 1-1.4
-                                            0l-2-2a1 1 0 0 1 1.4-1.42z"
-                                                                stroke="currentColor"
-                                                                strokeWidth="0.25"
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                fill="currentColor"
-                                                            />
-                                                        </svg>
-                                                    </div> */}
                                                 </div>
                                                 <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
                                                     <label htmlFor="Apartamento" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                                                         Num. Interior / Apartamento
                                                     </label>
-                                                    <input type="text" id="Apartamento" name="apto" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" placeholder />
+                                                    <input type="text" id="Apartamento" name="apto" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" />
                                                 </div>
                                                 <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
                                                     <label htmlFor="Country" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
@@ -115,9 +112,9 @@ export const Information = () => {
                                                     </label>
                                                     <div className="border border-gray-300 dark:border-gray-700 shadow-sm rounded flex relative">
                                                         <select type="text" name="state" required id="State/Province" className="bg-white dark:bg-gray-800 appearance-none z-10 pl-3 py-3 w-full text-sm border border-transparent focus:outline-none focus:border-indigo-700  text-gray-800 dark:text-gray-100 rounded">
-                                                            <option value="Switzerland">Switzerland</option>
-                                                            <option value="America">America</option>
-                                                            <option value="Australia">Australia</option>
+                                                            <option value="Baja California">Baja California</option>
+                                                            <option value="Ciudad de Mexico">Ciudad de Mexico</option>
+                                                            <option value="Nuevo Leon">Nuevo Leon</option>
                                                         </select>
                                                         <div
                                                             className="px-4 flex items-center border-l border-gray-300 dark:border-gray-700 flex-col justify-center text-gray-500
@@ -138,19 +135,19 @@ export const Information = () => {
                                                     <label htmlFor="City" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                                                         Ciudad
                                                     </label>
-                                                    <input type="text" id="City" name="city" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" placeholder />
+                                                    <input type="text" id="City" name="city" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" />
                                                 </div>
                                                 <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
                                                     <label htmlFor="ZIP" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                                                         ZIP/Postal Code
                                                     </label>
-                                                    <input type="text" id="ZIP" name="zip" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" placeholder />
+                                                    <input type="text" id="ZIP" name="zip" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" />
                                                 </div>
                                                 <div className="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
                                                     <label htmlFor="Phone" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                                                         Teléfono
                                                     </label>
-                                                    <input type="tel" id="Phone" name="phone" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" placeholder />
+                                                    <input type="tel" id="Phone" name="phone" required className="border border-gray-300 dark:border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent focus:border-indigo-700 text-gray-800 dark:text-gray-100" />
                                                 </div>
                                             </div>
                                         </div>
@@ -161,8 +158,12 @@ export const Information = () => {
                     </div>
                     <div className="md:w-1/4 w-full">
                         <Order />
-                        <LinkButton path='/checkout/payment' message='Pagar' />
-                        <LinkButton path='/' message='Cancelar' accent={true} />
+                        <div className="flex flex-col justify-center items-center py-5">
+                            <button onClick={handleSubmit} className={`w-full bg-indigo-600 text-white text-center px-2 py-2 rounded-md`}>
+                                Pagar
+                            </button>
+                        </div>
+                        <LinkButton path='/checkout' message='Cancelar' accent={true} />
                     </div>
                 </div>
             </div>

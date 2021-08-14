@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
+import AppContext from "../context/AppContext";
 
 export const Header = () => {
     const [menu, setMenu] = useState(false);
+    const { state } = useContext(AppContext);
+    const { cart } = state;
+
     return (
         <>
-            <div className="relative w-full h-full">
+            <div>
                 <nav className="lg:hidden relative z-50">
                     <div className="flex py-2 justify-between items-center px-4">
-                        <div>
+                        <Link to='/'>
                             <svg xmlns="http://www.w3.org/2000/svg" width={79} height={92} viewBox="0 0 79 92" fill="none">
                                 <rect width={79} height={92} fill="#1A202C" />
                                 <path
@@ -16,7 +20,7 @@ export const Header = () => {
                                     fill="white"
                                 />
                             </svg>
-                        </div>
+                        </Link>
                         <div className="visible flex items-center">
                             <ul id="list" className={menu ? "top-100 p-2 border-r bg-white absolute rounded top-0 left-0 right-0 shadow mt-24" : " hidden p-2 border-r bg-white absolute rounded top-0 left-0 right-0 shadow mt-24"}>
                                 <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
@@ -51,7 +55,7 @@ export const Header = () => {
                 </nav>
                 <nav className="f-f-l relative z-10">
                     <div className="relative z-10 mx-auto container hidden w-full px-4 xl:px-0 lg:flex justify-between items-center py-11">
-                        <div>
+                        <Link to='/'>
                             <svg xmlns="http://www.w3.org/2000/svg" width={79} height={92} viewBox="0 0 79 92" fill="none">
                                 <rect width={79} height={92} fill="#1A202C" />
                                 <path
@@ -59,7 +63,7 @@ export const Header = () => {
                                     fill="white"
                                 />
                             </svg>
-                        </div>
+                        </Link>
                         <div className="flex items-center text-gray-600 text-lg font-bold ">
                             <ul className="flex items-center pr-3 xl:pr-12">
                                 <li className="cursor-pointer">
@@ -67,10 +71,7 @@ export const Header = () => {
                                 </li>
                             </ul>
                             <Link to='/checkout' className="px-6 py-3 bg-white bg-indigo-700  text-white text-lg font-bold flex items-center justify-center">
-                                Checkout
-                                <svg className="ml-4" xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                    <path d="M9.129 5.24952L5.106 1.22652L6.1665 0.166016L12 5.99952L6.1665 11.833L5.106 10.7725L9.129 6.74952H0V5.24952H9.129Z" fill="white" />
-                                </svg>
+                                <i className="fas fa-shopping-bag"></i>{ cart.length > 0 && <span className="text-white text-xs ml-2">{cart.length}</span> }
                             </Link>
                         </div>
                     </div>

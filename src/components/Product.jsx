@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Product = ({ product }) => {
+export const Product = ({ product, handleAddToCart }) => {
     return (
         <>
             <div className="mx-2 w-72 lg:mb-0 mb-8 shadow-lg">
@@ -19,11 +19,12 @@ export const Product = ({ product }) => {
                             <p className="text-xs text-yellow-500">Featured</p>
                         </div>
                     </div>
-                    <div className="p-4">
+                    <div className="p-4 space-y-2.5">
                         <div className="flex items-center">
-                            <h2 className="text-lg font-semibold">{product.title}</h2>
+                            <h2 className="text-black text-base font-semibold">{product.title}</h2>
                             <p className="text-xs text-gray-600 pl-5">4 days ago</p>
                         </div>
+                        <h3 className="text-indigo-700 text-4xl leading-7 font-bold">${product.price}</h3>
                         <p className="text-xs text-gray-600 mt-2">{product.description}</p>
                         <div className="flex mt-4">
                             <div>
@@ -34,8 +35,16 @@ export const Product = ({ product }) => {
                             </div>
                         </div>
                         <div className="flex items-center justify-between py-4">
-                            <h2 className="text-indigo-700 text-xs font-semibold">Bay Area, San Francisco</h2>
-                            <h3 className="text-indigo-700 text-xl font-semibold">${product.price}</h3>
+                            <div>
+                                <button onClick={handleAddToCart(product)} className={`w-full bg-indigo-600 text-white text-center px-2 py-2 rounded-md`}>
+                                    Agregar al Carrito
+                                </button>
+                            </div>
+                            <div>
+                                <button className={`w-full bg-indigo-600 text-white text-center px-2 py-2 rounded-md`}>
+                                    🤍
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
