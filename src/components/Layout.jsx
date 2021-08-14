@@ -3,9 +3,11 @@ import { Header, Footer } from '@/components';
 
 export const Layout = ({ children }) => {
     return (
-        <div className="Main">
+        <div className="Main flex flex-col h-screen justify-between">
             <Header />
-            {children}
+            <div className="">
+                {children}
+            </div>
             <Footer />
         </div>
     );
