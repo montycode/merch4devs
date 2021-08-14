@@ -27,7 +27,7 @@ export const Payment = () => {
     };
 
     let subtotal = handleTotalSum();
-    let VAT = subtotal + (subtotal * 0.16);
+    let VAT = subtotal + 15 + (subtotal * 0.16);
     const total = VAT.toFixed(2);
 
     const handlePaymentSuccess = (data) => {
