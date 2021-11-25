@@ -3,10 +3,10 @@
 Simple ecommerce app made with React + Context APÏ
 
 ## Scripts
-- Start Dev Server
+### Start Dev Server
 > npm run start
 
-- Build App
+### Build App
 > npm run build
 
 ## Guide
